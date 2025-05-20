@@ -26,17 +26,17 @@ public class ProveedorService {
     }
 
     // READ BY ID
-    public Proveedor obtenerProveedorPorId(Long id) {
+    public Proveedor obtenerProveedorPorId(Integer id) {
         return proveedorRepository.findProveedorByIdNative(id);
     }
 
     // UPDATE
-    public void actualizarProveedor(Long id, String nombre, String telefono, String email) {
+    public void actualizarProveedor(Integer id, String nombre, String telefono, String email) {
         proveedorRepository.updateProveedor(id, nombre, telefono, email);
     }
 
     // DELETE
-    public void eliminarProveedor(Long id) {
+    public void eliminarProveedor(Integer id) {
         proveedorRepository.deleteProveedorByIdNative(id);
     }
 }

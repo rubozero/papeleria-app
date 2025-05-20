@@ -18,7 +18,7 @@ public class VentaService {
     }
 
     // CREATE
-    public void crearVenta(LocalDateTime fecha, Long idEmpleado, BigDecimal total) {
+    public void crearVenta(LocalDateTime fecha, Integer idEmpleado, BigDecimal total) {
         ventaRepository.insertVenta(fecha, idEmpleado, total);
     }
 
@@ -28,21 +28,21 @@ public class VentaService {
     }
 
     // READ BY ID
-    public Venta obtenerVentaPorId(Long id) {
+    public Venta obtenerVentaPorId(Integer id) {
         return ventaRepository.findVentaByIdNative(id);
     }
 
     // UPDATE
-    public void actualizarVenta(Long id, LocalDateTime fecha, Long idEmpleado, BigDecimal total) {
+    public void actualizarVenta(Integer id, LocalDateTime fecha, Integer idEmpleado, BigDecimal total) {
         ventaRepository.updateVenta(id, fecha, idEmpleado, total);
     }
 
-    public void actualizarVentaSinFecha(Long id, Long idEmpleado, BigDecimal total) {
+    public void actualizarVentaSinFecha(Integer id, Integer idEmpleado, BigDecimal total) {
         ventaRepository.updateVentaSinFecha(id, idEmpleado, total);
     }
 
     // DELETE
-    public void eliminarVenta(Long id) {
+    public void eliminarVenta(Integer id) {
         ventaRepository.deleteVentaByIdNative(id);
     }
 }

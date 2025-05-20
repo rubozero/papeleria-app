@@ -9,37 +9,37 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
-public interface VentaRepository extends JpaRepository<Venta, Long> {
+public interface VentaRepository extends JpaRepository<Venta, Integer> {
 
     // CREATE
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO VENTA (fecha, id_empleado, total) VALUES (:fecha, :idEmpleado, :total)", nativeQuery = true)
-    void insertVenta(LocalDateTime fecha, Long idEmpleado, BigDecimal total);
+    @Query(value = "INSERT INTO Venta (fecha, id_empleado, total) VALUES (:fecha, :idEmpleado, :total)", nativeQuery = true)
+    void insertVenta(LocalDateTime fecha, Integer idEmpleado, BigDecimal total);
 
     // READ ALL
-    @Query(value = "SELECT * FROM VENTA", nativeQuery = true)
+    @Query(value = "SELECT * FROM Venta", nativeQuery = true)
     List<Venta> findAllVentasNative();
 
     // READ BY ID
-    @Query(value = "SELECT * FROM VENTA WHERE id_venta = :id", nativeQuery = true)
-    Venta findVentaByIdNative(Long id);
+    @Query(value = "SELECT * FROM Venta WHERE id_venta = :id", nativeQuery = true)
+    Venta findVentaByIdNative(Integer id);
 
     // UPDATE
     @Modifying
     @Transactional
-    @Query(value = "UPDATE VENTA SET fecha = :fecha, id_empleado = :idEmpleado, total = :total WHERE id_venta = :id", nativeQuery = true)
-    void updateVenta(Long id, LocalDateTime fecha, Long idEmpleado, BigDecimal total);
+    @Query(value = "UPDATE Venta SET fecha = :fecha, id_empleado = :idEmpleado, total = :total WHERE id_venta = :id", nativeQuery = true)
+    void updateVenta(Integer id, LocalDateTime fecha, Integer idEmpleado, BigDecimal total);
 
     // UPDATE SIN FECHA
     @Modifying
     @Transactional
-    @Query(value = "UPDATE VENTA SET id_empleado = :idEmpleado, total = :total WHERE id_venta = :id", nativeQuery = true)
-    void updateVentaSinFecha(Long id, Long idEmpleado, BigDecimal total);
+    @Query(value = "UPDATE Venta SET id_empleado = :idEmpleado, total = :total WHERE id_venta = :id", nativeQuery = true)
+    void updateVentaSinFecha(Integer id, Integer idEmpleado, BigDecimal total);
 
     // DELETE
     @Modifying
     @Transactional
-    @Query(value = "DELETE FROM VENTA WHERE id_venta = :id", nativeQuery = true)
-    void deleteVentaByIdNative(Long id);
+    @Query(value = "DELETE FROM Venta WHERE id_venta = :id", nativeQuery = true)
+    void deleteVentaByIdNative(Integer id);
 }

@@ -35,7 +35,7 @@ public class VentaController {
 
     // Agregar venta (sin pedir fecha, la asigna el backend)
     @PostMapping("/venta")
-    public String agregarVenta(@RequestParam("idEmpleado") Long idEmpleado,
+    public String agregarVenta(@RequestParam("idEmpleado") Integer idEmpleado,
                                @RequestParam("total") BigDecimal total) {
         ventaService.crearVenta(LocalDateTime.now(), idEmpleado, total);
         return "redirect:/ventas";
@@ -43,8 +43,8 @@ public class VentaController {
 
     // Actualizar venta (no permite editar la fecha)
     @PostMapping("/venta/actualizar")
-    public String actualizarVenta(@RequestParam("id") Long id,
-                                  @RequestParam("idEmpleado") Long idEmpleado,
+    public String actualizarVenta(@RequestParam("id") Integer id,
+                                  @RequestParam("idEmpleado") Integer idEmpleado,
                                   @RequestParam("total") BigDecimal total) {
         ventaService.actualizarVentaSinFecha(id, idEmpleado, total);
         return "redirect:/ventas";
@@ -52,7 +52,7 @@ public class VentaController {
 
     // Eliminar venta
     @PostMapping("/venta/eliminar")
-    public String eliminarVenta(@RequestParam("id") Long id) {
+    public String eliminarVenta(@RequestParam("id") Integer id) {
         ventaService.eliminarVenta(id);
         return "redirect:/ventas";
     }

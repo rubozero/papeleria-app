@@ -40,8 +40,8 @@ public class DetalleVentaController {
 
     // Agregar detalle de venta
     @PostMapping("/detalle-venta")
-    public String agregarDetalle(@RequestParam Long idVenta,
-                                 @RequestParam Long idProducto,
+    public String agregarDetalle(@RequestParam Integer idVenta,
+                                 @RequestParam Integer idProducto,
                                  @RequestParam Integer cantidad,
                                  @RequestParam BigDecimal subtotal) {
         detalleVentaService.crearDetalleVenta(idVenta, idProducto, cantidad, subtotal);
@@ -50,9 +50,9 @@ public class DetalleVentaController {
 
     // Actualizar detalle de venta
     @PostMapping("/detalle-venta/actualizar")
-    public String actualizarDetalle(@RequestParam Long id,
-                                    @RequestParam Long idVenta,
-                                    @RequestParam Long idProducto,
+    public String actualizarDetalle(@RequestParam Integer id,
+                                    @RequestParam Integer idVenta,
+                                    @RequestParam Integer idProducto,
                                     @RequestParam Integer cantidad,
                                     @RequestParam BigDecimal subtotal) {
         detalleVentaService.actualizarDetalleVenta(id, idVenta, idProducto, cantidad, subtotal);
@@ -61,7 +61,7 @@ public class DetalleVentaController {
 
     // Eliminar detalle de venta
     @PostMapping("/detalle-venta/eliminar")
-    public String eliminarDetalle(@RequestParam Long id) {
+    public String eliminarDetalle(@RequestParam Integer id) {
         detalleVentaService.eliminarDetalleVenta(id);
         return "redirect:/detalle-venta";
     }

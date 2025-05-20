@@ -26,12 +26,12 @@ public class CategoriaService {
     }
 
     // Actualizar una categoría existente
-    public void actualizarCategoria(Long id, String nombreCategoria) {
+    public void actualizarCategoria(Integer id, String nombreCategoria) {
         categoriaProductoRepository.updateCategoria(id, nombreCategoria);
     }
 
     // Eliminar una categoría
-    public void eliminarCategoria(Long id) {
+    public void eliminarCategoria(Integer id) {
         categoriaProductoRepository.deleteCategoriaByIdNative(id);
     }
 }

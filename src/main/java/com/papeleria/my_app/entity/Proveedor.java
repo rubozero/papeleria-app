@@ -3,13 +3,13 @@ package com.papeleria.my_app.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "PROVEEDOR")
+@Table(name = "Proveedor")
 public class Proveedor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_proveedor")
-    private Long idProveedor;
+    private Integer idProveedor;
 
     @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
@@ -22,11 +22,11 @@ public class Proveedor {
 
     // Getters and Setters
 
-    public Long getIdProveedor() {
+    public Integer getIdProveedor() {
         return idProveedor;
     }
 
-    public void setIdProveedor(Long idProveedor) {
+    public void setIdProveedor(Integer idProveedor) {
         this.idProveedor = idProveedor;
     }
 

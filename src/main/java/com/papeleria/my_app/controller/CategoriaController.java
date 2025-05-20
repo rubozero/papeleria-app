@@ -31,13 +31,13 @@ public class CategoriaController {
     }
 
     @PostMapping("/categoria/actualizar")
-    public String actualizarCategoria(@RequestParam Long id, @RequestParam String nombreCategoria) {
+    public String actualizarCategoria(@RequestParam Integer id, @RequestParam String nombreCategoria) {
         categoriaService.actualizarCategoria(id, nombreCategoria);
         return "redirect:/categorias";
     }
 
     @PostMapping("/categoria/eliminar")
-    public String eliminarCategoria(@RequestParam Long id) {
+    public String eliminarCategoria(@RequestParam Integer id) {
         categoriaService.eliminarCategoria(id);
         return "redirect:/categorias";
     }

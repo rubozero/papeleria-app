@@ -56,14 +56,14 @@ public class ProductoController {
     }
 
     @GetMapping("/producto/{id}")
-    public String verProducto(@PathVariable Long id, Model model) {
+    public String verProducto(@PathVariable Integer id, Model model) {
         Producto producto = productoService.obtenerProductoPorId(id);
         model.addAttribute("producto", producto);
         return "producto-detalle";
     }
 
     @PostMapping("/producto/actualizar")
-    public String actualizarProducto(@RequestParam Long id,
+    public String actualizarProducto(@RequestParam Integer id,
                                      @RequestParam String nombre,
                                      @RequestParam BigDecimal precioCompra,
                                      @RequestParam BigDecimal precioVenta,
@@ -75,7 +75,7 @@ public class ProductoController {
     }
 
     @PostMapping("/producto/eliminar")
-    public String eliminarProducto(@RequestParam Long id) {
+    public String eliminarProducto(@RequestParam Integer id) {
         productoService.eliminarProducto(id);
         return "redirect:/productos";
     }

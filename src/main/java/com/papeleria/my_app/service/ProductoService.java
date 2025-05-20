@@ -26,17 +26,17 @@ public class ProductoService {
     }
 
     // READ BY ID
-    public Producto obtenerProductoPorId(Long id) {
+    public Producto obtenerProductoPorId(Integer id) {
         return productoRepository.findProductoByIdNative(id);
     }
 
     // UPDATE
-    public void actualizarProducto(Long id, String nombre, BigDecimal precioCompra, BigDecimal precioVenta, Integer stock, String nombreProveedor, Integer idCategoria) {
+    public void actualizarProducto(Integer id, String nombre, BigDecimal precioCompra, BigDecimal precioVenta, Integer stock, String nombreProveedor, Integer idCategoria) {
         productoRepository.updateProducto(id, nombre, precioCompra, precioVenta, stock, nombreProveedor, idCategoria);
     }
 
     // DELETE
-    public void eliminarProducto(Long id) {
+    public void eliminarProducto(Integer id) {
         productoRepository.deleteProductoByIdNative(id);
     }
 }

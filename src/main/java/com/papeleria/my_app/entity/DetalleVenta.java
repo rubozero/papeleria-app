@@ -4,13 +4,13 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "DETALLEVENTA")
+@Table(name = "DetalleVenta")
 public class DetalleVenta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_detalle")
-    private Long idDetalle;
+    private Integer idDetalle;
 
     @ManyToOne
     @JoinColumn(name = "id_venta", nullable = false)
@@ -28,11 +28,11 @@ public class DetalleVenta {
 
     // Getters and Setters
 
-    public Long getIdDetalle() {
+    public Integer getIdDetalle() {
         return idDetalle;
     }
 
-    public void setIdDetalle(Long idDetalle) {
+    public void setIdDetalle(Integer idDetalle) {
         this.idDetalle = idDetalle;
     }
 

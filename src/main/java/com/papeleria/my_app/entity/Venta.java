@@ -5,13 +5,13 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "VENTA")
+@Table(name = "Venta")
 public class Venta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_venta")
-    private Long idVenta;
+    private Integer idVenta;
 
     @Column(name = "fecha", nullable = false)
     private LocalDateTime fecha;
@@ -25,11 +25,11 @@ public class Venta {
 
     // Getters and Setters
 
-    public Long getIdVenta() {
+    public Integer getIdVenta() {
         return idVenta;
     }
 
-    public void setIdVenta(Long idVenta) {
+    public void setIdVenta(Integer idVenta) {
         this.idVenta = idVenta;
     }
 

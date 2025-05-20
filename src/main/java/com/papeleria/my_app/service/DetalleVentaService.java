@@ -17,7 +17,7 @@ public class DetalleVentaService {
     }
 
     // CREATE
-    public void crearDetalleVenta(Long idVenta, Long idProducto, Integer cantidad, BigDecimal subtotal) {
+    public void crearDetalleVenta(Integer idVenta, Integer idProducto, Integer cantidad, BigDecimal subtotal) {
         detalleVentaRepository.insertDetalleVenta(idVenta, idProducto, cantidad, subtotal);
     }
 
@@ -27,17 +27,17 @@ public class DetalleVentaService {
     }
 
     // READ BY ID
-    public DetalleVenta obtenerDetallePorId(Long id) {
+    public DetalleVenta obtenerDetallePorId(Integer id) {
         return detalleVentaRepository.findDetalleByIdNative(id);
     }
 
     // UPDATE
-    public void actualizarDetalleVenta(Long id, Long idVenta, Long idProducto, Integer cantidad, BigDecimal subtotal) {
+    public void actualizarDetalleVenta(Integer id, Integer idVenta, Integer idProducto, Integer cantidad, BigDecimal subtotal) {
         detalleVentaRepository.updateDetalleVenta(id, idVenta, idProducto, cantidad, subtotal);
     }
 
     // DELETE
-    public void eliminarDetalleVenta(Long id) {
+    public void eliminarDetalleVenta(Integer id) {
         detalleVentaRepository.deleteDetalleVentaByIdNative(id);
     }
 }

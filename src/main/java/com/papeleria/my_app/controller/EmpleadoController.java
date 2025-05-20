@@ -35,7 +35,7 @@ public class EmpleadoController {
 
     // Actualizar empleado
     @PostMapping("/empleado/actualizar")
-    public String actualizarEmpleado(@RequestParam Long id,
+    public String actualizarEmpleado(@RequestParam Integer id,
                                      @RequestParam String nombre,
                                      @RequestParam String turno) {
         empleadoService.actualizarEmpleado(id, nombre, turno);
@@ -44,7 +44,7 @@ public class EmpleadoController {
 
     // Eliminar empleado
     @PostMapping("/empleado/eliminar")
-    public String eliminarEmpleado(@RequestParam Long id) {
+    public String eliminarEmpleado(@RequestParam Integer id) {
         empleadoService.eliminarEmpleado(id);
         return "redirect:/empleados";
     }

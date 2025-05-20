@@ -26,17 +26,17 @@ public class EmpleadoService {
     }
 
     // READ BY ID
-    public Empleado obtenerEmpleadoPorId(Long id) {
+    public Empleado obtenerEmpleadoPorId(Integer id) {
         return empleadoRepository.findEmpleadoByIdNative(id);
     }
 
     // UPDATE
-    public void actualizarEmpleado(Long id, String nombre, String turno) {
+    public void actualizarEmpleado(Integer id, String nombre, String turno) {
         empleadoRepository.updateEmpleado(id, nombre, turno);
     }
 
     // DELETE
-    public void eliminarEmpleado(Long id) {
+    public void eliminarEmpleado(Integer id) {
         empleadoRepository.deleteEmpleadoByIdNative(id);
     }
 }

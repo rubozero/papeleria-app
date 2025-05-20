@@ -36,7 +36,7 @@ public class ProveedorController {
 
     // Actualizar proveedor
     @PostMapping("/proveedor/actualizar")
-    public String actualizarProveedor(@RequestParam Long id,
+    public String actualizarProveedor(@RequestParam Integer id,
                                       @RequestParam String nombre,
                                       @RequestParam(required = false) String telefono,
                                       @RequestParam(required = false) String email) {
@@ -46,7 +46,7 @@ public class ProveedorController {
 
     // Eliminar proveedor
     @PostMapping("/proveedor/eliminar")
-    public String eliminarProveedor(@RequestParam Long id) {
+    public String eliminarProveedor(@RequestParam Integer id) {
         proveedorService.eliminarProveedor(id);
         return "redirect:/proveedores";
     }
