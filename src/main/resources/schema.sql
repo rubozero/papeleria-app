@@ -8,7 +8,8 @@ CREATE TABLE PRODUCTO (
     nombre VARCHAR(100) NOT NULL,
     precio_compra DECIMAL(10,2) NOT NULL,
     precio_venta DECIMAL(10,2) NOT NULL,
-    stock INTEGER NOT NULL,
+    stock INTEGER NOT NULL CHECK (stock >= 0),
+    nombre_proveedor VARCHAR(100) NOT NULL DEFAULT 'NA',
     id_categoria INTEGER NOT NULL,
     CONSTRAINT fk_categoria FOREIGN KEY (id_categoria) REFERENCES CATEGORIAPRODUCTO(id_categoria)
 );

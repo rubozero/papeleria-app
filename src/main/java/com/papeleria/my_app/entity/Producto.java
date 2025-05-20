@@ -24,6 +24,9 @@ public class Producto {
     @Column(name = "stock", nullable = false)
     private Integer stock;
 
+    @Column(name = "nombre_proveedor", nullable = false, length = 100)
+    private String nombreProveedor = "NA";
+
     @ManyToOne
     @JoinColumn(name = "id_categoria", nullable = false)
     private CategoriaProducto categoria;
@@ -68,6 +71,14 @@ public class Producto {
 
     public void setStock(Integer stock) {
         this.stock = stock;
+    }
+
+    public String getNombreProveedor() {
+        return nombreProveedor;
+    }
+
+    public void setNombreProveedor(String nombreProveedor) {
+        this.nombreProveedor = nombreProveedor;
     }
 
     public CategoriaProducto getCategoria() {

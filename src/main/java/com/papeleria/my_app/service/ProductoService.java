@@ -16,8 +16,8 @@ public class ProductoService {
     }
 
     // CREATE
-    public void crearProducto(String nombre, BigDecimal precioCompra, BigDecimal precioVenta, Integer stock, Integer idCategoria) {
-        productoRepository.insertProducto(nombre, precioCompra, precioVenta, stock, idCategoria);
+    public void crearProducto(String nombre, BigDecimal precioCompra, BigDecimal precioVenta, Integer stock, String nombreProveedor, Integer idCategoria) {
+        productoRepository.insertProducto(nombre, precioCompra, precioVenta, stock, nombreProveedor, idCategoria);
     }
 
     // READ ALL
@@ -31,8 +31,8 @@ public class ProductoService {
     }
 
     // UPDATE
-    public void actualizarProducto(Long id, String nombre, BigDecimal precioCompra, BigDecimal precioVenta, Integer stock, Integer idCategoria) {
-        productoRepository.updateProducto(id, nombre, precioCompra, precioVenta, stock, idCategoria);
+    public void actualizarProducto(Long id, String nombre, BigDecimal precioCompra, BigDecimal precioVenta, Integer stock, String nombreProveedor, Integer idCategoria) {
+        productoRepository.updateProducto(id, nombre, precioCompra, precioVenta, stock, nombreProveedor, idCategoria);
     }
 
     // DELETE

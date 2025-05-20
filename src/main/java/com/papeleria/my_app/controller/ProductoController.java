@@ -2,8 +2,11 @@ package com.papeleria.my_app.controller;
 
 import com.papeleria.my_app.service.ProductoService;
 import com.papeleria.my_app.service.CategoriaService;
+import com.papeleria.my_app.service.ProveedorService;
 import com.papeleria.my_app.entity.Producto;
 import com.papeleria.my_app.entity.CategoriaProducto;
+import com.papeleria.my_app.entity.Proveedor;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,15 +19,22 @@ public class ProductoController {
 
     private final ProductoService productoService;
     private final CategoriaService categoriaService;
+    private final ProveedorService proveedorService;
 
-    public ProductoController(ProductoService productoService, CategoriaService categoriaService) {
+    public ProductoController(ProductoService productoService, CategoriaService categoriaService, ProveedorService proveedorService) {
         this.productoService = productoService;
         this.categoriaService = categoriaService;
+        this.proveedorService = proveedorService;
     }
 
     @ModelAttribute("categorias")
     public List<CategoriaProducto> categorias() {
         return categoriaService.obtenerTodasLasCategorias();
+    }
+
+    @ModelAttribute("proveedores")
+    public List<Proveedor> proveedores() {
+        return proveedorService.obtenerTodosLosProveedores();
     }
 
     // Página de productos
@@ -39,8 +49,9 @@ public class ProductoController {
                                 @RequestParam BigDecimal precioCompra,
                                 @RequestParam BigDecimal precioVenta,
                                 @RequestParam Integer stock,
+                                @RequestParam String nombreProveedor,
                                 @RequestParam Integer idCategoria) {
-        productoService.crearProducto(nombre, precioCompra, precioVenta, stock, idCategoria);
+        productoService.crearProducto(nombre, precioCompra, precioVenta, stock, nombreProveedor, idCategoria);
         return "redirect:/productos";
     }
 
@@ -57,8 +68,9 @@ public class ProductoController {
                                      @RequestParam BigDecimal precioCompra,
                                      @RequestParam BigDecimal precioVenta,
                                      @RequestParam Integer stock,
+                                     @RequestParam String nombreProveedor,
                                      @RequestParam Integer idCategoria) {
-        productoService.actualizarProducto(id, nombre, precioCompra, precioVenta, stock, idCategoria);
+        productoService.actualizarProducto(id, nombre, precioCompra, precioVenta, stock, nombreProveedor, idCategoria);
         return "redirect:/productos";
     }
 
