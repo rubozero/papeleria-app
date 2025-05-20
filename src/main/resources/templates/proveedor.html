@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Proveedores</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">Listado de Proveedores</h2>
+        <a href="/" class="btn btn-outline-primary">Regresar a Inicio</a>
+    </div>
+    <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#agregarProveedorModal">
+        Agregar Proveedor
+    </button>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Teléfono</th>
+                <th>Email</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="prov, iterStat : ${proveedores}">
+                <td th:text="${prov.idProveedor}"></td>
+                <td th:text="${prov.nombre}"></td>
+                <td th:text="${prov.telefono}"></td>
+                <td th:text="${prov.email}"></td>
+                <td>
+                    <!-- Botón para abrir modal de editar -->
+                    <button type="button" class="btn btn-warning btn-sm mb-1"
+                        th:data-bs-target="'#editarProveedorModal__' + ${iterStat.index}"
+                        data-bs-toggle="modal">
+                        Editar
+                    </button>
+                    <!-- Modal de edición -->
+                    <div class="modal fade"
+                         th:id="'editarProveedorModal__' + ${iterStat.index}"
+                         tabindex="-1"
+                         aria-labelledby="editarProveedorModalLabel"
+                         aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <form th:action="@{/proveedor/actualizar}" method="post">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="editarProveedorModalLabel">Editar Proveedor</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" name="id" th:value="${prov.idProveedor}" />
+                                <div class="mb-2">
+                                    <label class="form-label">Nombre</label>
+                                    <input type="text" name="nombre" th:value="${prov.nombre}" class="form-control" required />
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Teléfono</label>
+                                    <input type="text" name="telefono" th:value="${prov.telefono}" class="form-control" />
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" name="email" th:value="${prov.email}" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                              <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Eliminar -->
+                    <form th:action="@{/proveedor/eliminar}" method="post" class="d-inline"
+                          onsubmit="return confirm('¿Estás seguro de que deseas eliminar este proveedor?');">
+                        <input type="hidden" name="id" th:value="${prov.idProveedor}" />
+                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Modal para agregar proveedor -->
+    <div class="modal fade" id="agregarProveedorModal" tabindex="-1" aria-labelledby="agregarProveedorModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form th:action="@{/proveedor}" method="post">
+            <div class="modal-header">
+              <h5 class="modal-title" id="agregarProveedorModalLabel">Agregar Proveedor</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-2">
+                    <label class="form-label">Nombre</label>
+                    <input type="text" name="nombre" class="form-control" required>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Teléfono</label>
+                    <input type="text" name="telefono" class="form-control">
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control">
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-primary">Agregar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

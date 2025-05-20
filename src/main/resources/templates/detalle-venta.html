@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de Ventas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">Detalle de Ventas</h2>
+        <a href="/" class="btn btn-outline-primary">Regresar a Inicio</a>
+    </div>
+    <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#agregarDetalleVentaModal">
+        Agregar Detalle
+    </button>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Venta</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="detalle, iterStat : ${detalles}">
+                <td th:text="${detalle.idDetalle}"></td>
+                <td th:text="${detalle.venta.idVenta}"></td>
+                <td th:text="${detalle.producto.nombre}"></td>
+                <td th:text="${detalle.cantidad}"></td>
+                <td th:text="${detalle.subtotal}"></td>
+                <td>
+                    <!-- Botón para abrir modal de editar -->
+                    <button type="button" class="btn btn-warning btn-sm mb-1"
+                        th:data-bs-target="'#editarDetalleVentaModal__' + ${iterStat.index}"
+                        data-bs-toggle="modal">
+                        Editar
+                    </button>
+                    <!-- Modal de edición -->
+                    <div class="modal fade"
+                         th:id="'editarDetalleVentaModal__' + ${iterStat.index}"
+                         tabindex="-1"
+                         aria-labelledby="editarDetalleVentaModalLabel"
+                         aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <form th:action="@{/detalle-venta/actualizar}" method="post">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="editarDetalleVentaModalLabel">Editar Detalle</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" name="id" th:value="${detalle.idDetalle}" />
+                                <div class="mb-2">
+                                    <label class="form-label">Venta</label>
+                                    <select name="idVenta" class="form-control" required>
+                                        <option th:each="venta : ${ventas}"
+                                                th:value="${venta.idVenta}"
+                                                th:text="${venta.idVenta}"
+                                                th:selected="${venta.idVenta} == ${detalle.venta.idVenta}">
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Producto</label>
+                                    <select name="idProducto" class="form-control" required>
+                                        <option th:each="prod : ${productos}"
+                                                th:value="${prod.idProducto}"
+                                                th:text="${prod.nombre}"
+                                                th:selected="${prod.idProducto} == ${detalle.producto.idProducto}">
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Cantidad</label>
+                                    <input type="number" name="cantidad" th:value="${detalle.cantidad}" min="1" class="form-control" required />
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Subtotal</label>
+                                    <input type="number" name="subtotal" th:value="${detalle.subtotal}" step="0.01" min="0" class="form-control" required />
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                              <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Eliminar -->
+                    <form th:action="@{/detalle-venta/eliminar}" method="post" class="d-inline"
+                          onsubmit="return confirm('¿Estás seguro de que deseas eliminar este detalle?');">
+                        <input type="hidden" name="id" th:value="${detalle.idDetalle}" />
+                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Modal para agregar detalle -->
+    <div class="modal fade" id="agregarDetalleVentaModal" tabindex="-1" aria-labelledby="agregarDetalleVentaModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form th:action="@{/detalle-venta}" method="post">
+            <div class="modal-header">
+              <h5 class="modal-title" id="agregarDetalleVentaModalLabel">Agregar Detalle</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-2">
+                    <label class="form-label">Venta</label>
+                    <select name="idVenta" class="form-control" required>
+                        <option th:each="venta : ${ventas}"
+                                th:value="${venta.idVenta}"
+                                th:text="${venta.idVenta}">
+                        </option>
+                    </select>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Producto</label>
+                    <select name="idProducto" class="form-control" required>
+                        <option th:each="prod : ${productos}"
+                                th:value="${prod.idProducto}"
+                                th:text="${prod.nombre}">
+                        </option>
+                    </select>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Cantidad</label>
+                    <input type="number" name="cantidad" class="form-control" min="1" required>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Subtotal</label>
+                    <input type="number" name="subtotal" class="form-control" step="0.01" min="0" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-primary">Agregar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
