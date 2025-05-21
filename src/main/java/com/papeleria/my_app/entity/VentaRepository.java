@@ -1,6 +1,7 @@
 package com.papeleria.my_app.entity;
 
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,4 +43,8 @@ public interface VentaRepository extends JpaRepository<Venta, Integer> {
     @Transactional
     @Query(value = "DELETE FROM Venta WHERE id_venta = :id", nativeQuery = true)
     void deleteVentaByIdNative(Integer id);
+
+    // READ ALL VENTAS POR EMPLEADO USANDO JOIN
+    @Query(value = "SELECT v.* FROM Venta v JOIN Empleado e ON v.id_empleado = e.id_empleado WHERE e.id_empleado = :idEmpleado", nativeQuery = true)
+    List<Venta> findVentasByEmpleadoNative(@Param("idEmpleado") Integer idEmpleado);
 }

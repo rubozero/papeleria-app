@@ -32,6 +32,11 @@ public class VentaService {
         return ventaRepository.findVentaByIdNative(id);
     }
 
+    // READ BY EMPLEADO
+    public List<Venta> obtenerVentasPorEmpleado(Integer idEmpleado) {
+        return ventaRepository.findVentasByEmpleadoNative(idEmpleado);
+    }
+
     // UPDATE
     public void actualizarVenta(Integer id, LocalDateTime fecha, Integer idEmpleado, BigDecimal total) {
         ventaRepository.updateVenta(id, fecha, idEmpleado, total);

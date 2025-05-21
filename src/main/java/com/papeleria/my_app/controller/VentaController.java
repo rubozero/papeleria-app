@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 public class VentaController {
@@ -55,5 +57,26 @@ public class VentaController {
     public String eliminarVenta(@RequestParam("id") Integer id) {
         ventaService.eliminarVenta(id);
         return "redirect:/ventas";
+    }
+
+    // Obtener ventas por empleado para empleados-ventas.html (devuelve solo las ventas y el empleado)
+    @GetMapping("/ventas/empleado/{idEmpleado}")
+    public String listarVentasPorEmpleado(@PathVariable Integer idEmpleado, Model model) {
+        Empleado empleado = empleadoService.obtenerEmpleadoPorId(idEmpleado);
+        List<Venta> ventas = ventaService.obtenerVentasPorEmpleado(idEmpleado);
+        model.addAttribute("empleado", empleado);
+        model.addAttribute("ventas", ventas);
+        return "empleados-ventas :: ventasEmpleadoModal";
+    }
+
+    @GetMapping("/empleados-ventas")
+    public String mostrarEmpleadosVentas(Model model) {
+        List<Empleado> empleados = empleadoService.obtenerTodosLosEmpleados();
+        List<Venta> ventas = ventaService.obtenerTodasLasVentas();
+        Map<Integer, List<Venta>> ventasPorEmpleado = ventas.stream()
+            .collect(Collectors.groupingBy(v -> v.getEmpleado().getIdEmpleado()));
+        model.addAttribute("empleados", empleados);
+        model.addAttribute("ventasPorEmpleado", ventasPorEmpleado);
+        return "empleados-ventas";
     }
 }
